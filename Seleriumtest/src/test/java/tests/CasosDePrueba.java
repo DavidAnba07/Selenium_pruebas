@@ -26,7 +26,7 @@ public class CasosDePrueba {
 
     @AfterMethod
     public void posCondicion() {
-        driver.close();
+        //driver.close();
     }
 
     @BeforeMethod
@@ -128,7 +128,6 @@ public class CasosDePrueba {
 
         driver.findElement(By.xpath("//label[@for='marketing-opt-checkbox']")).click();
 
-
         driver.findElement(By.xpath("//label[@for='third-party-checkbox']")).click();
 
         WebElement btnRegistro = driver.findElement(By.xpath("//button[@type='submit']"));
@@ -157,6 +156,9 @@ public class CasosDePrueba {
 
         driver.findElement(By.id("login-button")).click();
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Nombre de usuario o contraseña incorrectos.')]")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//span[contains(text(),'Nombre de usuario o contraseña incorrectos.')]")).getText(), "Nombre de usuario o contraseña incorrectos.");
     }
 
     @Test
@@ -182,6 +184,10 @@ public class CasosDePrueba {
 
         driver.findElement(By.id("phonelogin-button")).click();
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains(text(),'Introducir tu código')]")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//p[contains(text(),'Introducir tu código')]")).getText(), "Introducir tu código");
+
     }
 
     @Test
@@ -206,10 +212,15 @@ public class CasosDePrueba {
         driver.findElement(By.xpath("//label[@for='phonelogin-remember']")).click();
 
         driver.findElement(By.id("phonelogin-button")).click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Comprueba el número de teléfono.')]")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//span[contains(text(),'Comprueba el número de teléfono.')]")).getText(), "Comprueba el número de teléfono.");
+
     }
 
     @Test
-    public void CP005_Buscar_Banda() {
+    public void CP006_Buscar_Banda() {
 
         By localizadorBtnBuscador = By.xpath("//span[contains(text(),'Buscar')]");
 
@@ -220,10 +231,14 @@ public class CasosDePrueba {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-testid='search-input']"))).sendKeys("Metallica");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-testid='herocard-click-handler']"))).click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Artista verificado')]")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//span[contains(text(),'Artista verificado')]")).getText(), "Artista verificado");
     }
 
     @Test
-    public void CP006_Buscar_Reproducir() {
+    public void CP007_Buscar_Reproducir() {
 
         By localizadorBtnBuscador = By.xpath("//span[contains(text(),'Buscar')]");
 
@@ -234,13 +249,19 @@ public class CasosDePrueba {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@data-testid='search-input']"))).sendKeys("Metallica");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-testid='herocard-click-handler']"))).click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Artista verificado')]")));
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='Button-sc-qlcn5g-0 futnNt']"))).click();
 
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button/span[contains(text(),'REGÍSTRATE GRATIS')]")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//button/span[contains(text(),'REGÍSTRATE GRATIS')]")).getText(), "REGÍSTRATE GRATIS");
+
     }
 
     @Test
-    public void CP007_Proceso_Premium() {
+    public void CP008_Proceso_Premium() {
 
         By localizadorBtnBuscador = By.xpath("//span[contains(text(),'Conseguir 3')]");
 
@@ -249,6 +270,10 @@ public class CasosDePrueba {
         btnBuscar.click();
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'Obtén 3 meses')]"))).click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/p[@id='login-to-continue']")));
+
+        Assert.assertEquals(driver.findElement(By.xpath("//div/p[@id='login-to-continue']")).getText(), "Para continuar, inicia sesión en Spotify.");
 
     }
 }
